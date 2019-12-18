@@ -2,3 +2,6 @@ opencv-python
 numpy
 jupyterlab
 scipy
+pandas
+tensorflow==1.13.1
+keras==2.2.4

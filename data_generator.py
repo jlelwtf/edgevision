@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 
-from tensorflow_core.python.keras.utils.data_utils import Sequence
+from keras.utils.data_utils import Sequence
 
 
 class DataGenerator(Sequence):
@@ -24,13 +24,15 @@ class DataGenerator(Sequence):
 
     def _load_data(self, indexes):
         x = np.zeros([len(indexes)] + list(self.image_size)).astype(np.uint8)
-        y = np.zeros((len(indexes), 1))
+        y = np.zeros((len(indexes), 2))
         for i, index in enumerate(indexes):
             note = self.dataset_dicts[index]
             image = cv2.imread(os.path.join(self.image_dir, note['image_name']))
             image = cv2.resize(image, (self.image_size[1], self.image_size[0]))
             x[i, ] = image
-            y[i, 0] = note['class']
+            label = np.zeros((2,))
+            label[note['class']] = 1
+            y[i, ] = label
         return x, y
 
     def __len__(self):
