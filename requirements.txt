@@ -3,5 +3,5 @@ numpy
 jupyterlab
 scipy
 pandas
-tensorflow==1.13.1
+tensorflow==1.15.4
 keras==2.2.4
